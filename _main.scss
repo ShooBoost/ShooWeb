@@ -1,0 +1,425 @@
+* {
+    // border: solid 1px black;
+    font-family: '微軟正黑體';
+    font-size: 18px;
+    @include padAndMobile {
+        font-size: 14px;
+    }
+};
+
+#app {
+    min-height: 1000px;
+
+    // 換行換起來
+    white-space: pre-line;
+    
+};
+
+
+.bg-yellow {
+    background-color: $basic-yellow;
+    color: $dark-blue;
+};
+
+.bg-pink {
+    background-color: $basic-pink;
+    color: $dark-blue;
+};
+
+.bg-green {
+    background-color: $basic-green;
+    color: $dark-blue;
+};
+
+.bg-dark {
+    background-color: $dark-blue;
+    color: $dark-blue;
+
+    .visitor {
+        justify-content: flex-end;
+    
+        .msgText {
+            right: 0px;
+            background-color: $white;
+            p {
+                color: $dark-blue;
+                font-weight: 400;
+            };
+            
+        };
+    
+    };
+};
+
+.nav {
+    position: fixed;
+    width: 100%;
+    height: 76px;
+    display: flex;
+    justify-content: space-around;
+    z-index: 10;
+    
+
+    .navBar {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: $transparent-white;
+    };
+    
+
+    div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        a {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            box-sizing: border-box;
+            margin-right: 10px;
+
+            @include padAndMobile {
+                width: 10px;
+                height: 10px;
+                margin-right: 5px;
+            };
+        };
+        a:hover {
+            border: $white 2px solid;
+        };
+        #bg-yellow {
+            background-color: $basic-yellow;
+        };
+        #bg-pink {
+            background-color: $basic-pink;
+        };
+        #bg-green {
+            background-color: $basic-green;
+        };
+        #bg-dark {
+            background-color: $dark-blue;
+        }
+
+        
+
+    };
+
+    .toggleImg {
+        width: 20px;
+        cursor: pointer;
+
+        @include padAndMobile {
+            width: 10px;
+        };
+    };
+
+
+
+    .logoImg {
+        width: 70px;
+
+        @include padAndMobile {
+            width: 50px;
+        };
+    };
+    
+
+};
+
+.toggleList {
+    position: fixed;
+    display: flex;
+    width: 377px;
+    height: 100%;
+    left: 0;
+    top: 76px;
+    z-index: 10;
+
+    @include padAndMobile {
+        max-width: 80%;
+    };
+
+    ul {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: $transparent-white;
+
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a {
+                padding: 30px;
+                width: 100%;
+                height: 100%;
+                line-height: 50px;
+                color: $dark-blue;
+                text-decoration: solid;
+                text-align: center;
+                cursor: pointer;
+
+            };
+        };
+
+        li:hover {
+            background-color: $white;
+        };
+    };
+
+};
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    padding-top: 76px;
+    transition: 2s;
+
+    .welcomeImg {
+        margin-top: 64px;
+        width: 30%;
+
+        @include padAndMobile {
+            margin-top: 34px;
+        }
+    };
+
+    h3 {
+        color: $white;
+        font-size: 36px;
+
+        @include padAndMobile {
+            font-size: 26px;
+        }
+    }
+
+}
+
+#messages {
+    max-width: 70%;
+    padding: 0px;
+
+    @include padAndMobile {
+        max-width: calc( 100% - 20px );
+    };
+
+    li {
+        overflow: hidden;
+    }
+    
+};
+
+
+.msg {
+    display: flex;
+    
+    .shooImgS {
+        align-self: flex-end;
+        width: 36px;
+        height: auto;
+
+    };
+    
+    .msgBubble {
+        position: relative;
+        margin-top: 20px;
+        margin-left: 10px;
+    };
+};
+
+
+.msgText {
+    max-width: 50%;
+    padding: 15px 25px;
+    background-color: $transparent-white;
+    border-radius: 40px;
+
+    p {
+    margin: 0;
+    line-height: 30px;
+
+    @include padAndMobile {
+        line-height: 22px;
+    };
+    };
+
+};
+
+.msgWorks {
+    padding: 0;
+    padding: 15px 25px;
+    max-width: 50%;
+    overflow: hidden;
+
+    .worksBtnBox {
+        z-index: 10;
+        
+    }
+
+    .worksBtn {
+        position: absolute;
+        border: none;
+        background-color: $dark-blue;
+        border: solid $transparent-white 2px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+
+        span {
+            font-weight: 700;
+            color: $transparent-white;
+        };
+    };
+
+    .worksBtnR {
+        right: 0px;
+        
+    }
+
+    ul {
+        padding: 0;
+        // .msgWorks 設定 overflow hidden 後 作品會變形擠在 .msgWorks 的大小內
+        // 似乎很懼怕超出 .msgWorks 呢
+        // 所以在 ul 處要用 inline-flex 才不讓內部變形
+        display: inline-flex;
+        transition: 1s;
+        transition-duration: 1s;
+
+        li {
+            margin: 0px 10px;
+            border-radius: 40px;
+            width: 260px;
+            overflow: hidden;
+            background-color: $transparent-white;
+            list-style: none;
+            box-sizing: content-box;
+            border: rgba(black, 0) 5px solid;
+            text-decoration: none;
+            
+            // 讓 hover 與 顯示 pre/next works 淡入淡出
+            transition-duration: 1.3s;
+
+            @include padAndMobile {
+                max-width: 200px;
+            };
+
+            a {
+                text-decoration: none;
+                color: $dark-blue;
+            }
+
+            .worksImg {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+
+                // center align img
+                display: block;
+                margin: 0 auto;
+
+                @include padAndMobile {
+                    max-height: 150px;
+                };
+                
+            };
+
+            .msgWorksTitle {
+                text-align: center;
+            };
+        };
+
+        li:hover {
+            border: $white 5px solid;
+            cursor: pointer ;
+            background-color: $white;
+            
+        };
+    };
+};
+
+
+
+.msgExp {
+    padding: 25px 25px 35px 25px;
+    background-color: $transparent-white;
+    border-radius: 40px;
+
+    .msgExpTitle, .msgExpTime {
+        text-align: center;
+        line-height: 30px;
+        margin: 0 10px;
+
+    };
+    .msgExpTime {
+        font-size: 12px;
+
+    };
+    .msgExpTitle {
+        font-size: 20px;
+        margin-bottom: 20px;
+        font-weight: 700;
+
+        @include padAndMobile {
+            font-size: 14px;
+        }
+    };
+    ul {
+        padding: 0px 25px;
+        li {
+            margin-top: 20px;
+            
+        };
+    };
+
+};
+
+.visitor {
+    justify-content: flex-end;
+
+    .msgText {
+        right: 0px;
+        background-color: $dark-blue;
+        p {
+            color: $white;
+            font-weight: 300;
+        };
+        
+    };
+
+};
+
+// vue transition
+.list-leave-active {
+    position: absolute;
+    opacity: 0;
+};
+
+
+.container-list{
+    opacity: 0;
+}
+
+.container-list-enter-active, .container-list-leave-active {
+    
+    transition: opacity 10s;
+    position: absolute;
+}
+.container-list-enter, .container-list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    
+    transform: translateY(30px);
+  }

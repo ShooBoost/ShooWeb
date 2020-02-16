@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>泳秀對話中 Chat with Shoo</title>
+    <link rel="shortcut icon" type="image/x-icon" href="asset/puff_bear.png">
+    
+    <!--
+    <link href="images/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="/stylesheets/all.css">
+    <script src="/javascripts/vendor.js"></script>
+    -->
+    <link rel="stylesheet" href="/css/all.css">
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/regular.js" integrity="sha384-t7yHmUlwFrLxHXNLstawVRBMeSLcXTbQ5hsd0ifzwGtN7ZF7RZ8ppM7Ldinuoiif" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+
+  </head>
+  
+  <body>
+    <div id="app" :class="bgClass">
+        <div class="nav" :class="bgClass">
+            <div class="navBar" >
+                <img class="toggleImg" v-on:click="showToggleList = !showToggleList" src="asset/toggle.svg" alt="toggle button">
+                <img class="logoImg" src="asset/logo.svg" alt="shoo shoo logo">
+                <div>
+                    <a id="bg-dark" v-on:click.prevent="bgClass = 'bg-dark'" href=""></a>
+                    <a id="bg-pink" v-on:click.prevent="bgClass = 'bg-pink'" href=""></a>
+                    <a id="bg-green" v-on:click.prevent="bgClass = 'bg-green'" href=""></a>
+
+                </div>
+            </div>
+            
+        </div>
+        <div class="toggleList"  :class="bgClass" v-if="showToggleList">
+            <ul>
+                <li v-for="item in toggleList">
+                    <a href="#" v-on:click="changeMessageShow(item.category)">{{ item.title }}</a>
+                </li>
+            </ul>
+        </div>
+    
+        <div class="container">
+            <img class="welcomeImg" :src="welcomeImg" alt="Shoo">
+            <h3>哩賀 :) 我是泳秀 </h3>
+            <ul id="messages" v-if="messageShow">
+                <li v-for="(item, index) in messageShowList" class="container-list-item">
+
+                    <text-component v-if="item.messageStyle === 'text'"
+                    :img-src-h="shooImgSrc"
+                    :text-h="item.content.text">
+                    </text-component>
+
+                    <exp-component v-if="item.messageStyle === 'exp'"
+                    :img-src-h="shooImgSrc"
+                    :exp-sub-title-h="item.content.subTitle"
+                    :exp-title-h="item.content.title"
+                    :exp-detail-list-h="item.content.textList">
+                    </exp-component>
+
+                    <works-component v-if="item.messageStyle === 'works'" 
+                    :work-list-h="item.content.workList" 
+                    :img-src-h="shooImgSrc">
+                    </works-component>
+
+                    <visitor-component v-if="item.messageStyle === 'visitor'"
+                    :text-h="item.content.text">
+                    </visitor-component>
+
+
+
+                    <!--
+                    <template v-if="item.messageStyle === 'text'">
+                        <div class="msg">
+                            <img class="shooImgS" :src="shooImgSrc" alt="Shoo">
+                            <div class="msgBubble msgText">
+                                <p>{{ item.content.text }}</p>
+                            </div>
+                        </div>
+                    </template>
+
+
+                    <template v-if="item.messageStyle === 'exp'">
+                        <div class="msg">
+                            <img class="shooImgS" :src="shooImgSrc" alt="Shoo">
+                            <div class="msgBubble msgExp">
+                                <p class="msgExpTime">{{ item.content.subTitle }}</p>
+                                <p class="msgExpTitle">{{ item.content.title }}</p>
+                                
+                                <ul>
+                                    <li v-for="expDetail in item.content.textList">{{ expDetail }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template v-if="item.messageStyle === 'works'">
+                        <div class="msg">
+                            <img class="shooImgS" :src="shooImgSrc" alt="Shoo">
+                            <div class="msgBubble msgWorks">
+                                <ul>
+                                    <a class="worksBtn worksBtnL" v-if="worksBtnL" v-on:click="worksPre"></a>
+                                    <li v-for="works in item.content.workList">
+                                        <img class="worksImg" :src="works.img" :alt="works.title">
+                                        <div>
+                                            <p class="msgWorksTitle">{{ works.title }}</p>
+                                        </div>
+                                    </li>
+                                    <a class="worksBtn worksBtnR" v-if="worksBtnR" v-on:click="worksNext"></a>
+                                </ul>
+                                <template slot="prevButton"><i class="fas fa-chevron-left"></i></template>
+                                <template slot="nextButton"><i class="fas fa-chevron-right"></i></template>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template v-if="item.messageStyle === 'visitor'">
+                        <div class="msg visitor">
+                            <div class="msgBubble msgText">
+                                <p>{{ item.content.text }}</p>
+                            </div>
+                        </div>
+                    </template>
+                    -->
+
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <script type="text/x-template" id="textTemplate">
+        <div class="msg">
+            <img class="shooImgS" :src="imgSrc" alt="Shoo">
+            <div class="msgBubble msgText">
+                <p>{{ text }}</p>
+            </div>
+        </div>
+    </script>
+
+    <!--< :img-src="" :works-list="" >-->
+    <script type="text/x-template" id="worksTemplate">
+        <div class="msg">
+            <img class="shooImgS" :src="imgSrc" alt="Shoo">
+            <div class="msgBubble msgWorks">
+                <div class="worksBtnBox">
+                    <a v-if="worksIndexNow !== 0" class="worksBtn worksBtnL" v-on:click="worksPre"><span><</span></a>
+                    <a v-if="worksIndexNow !== worksIndexLast" class="worksBtn worksBtnR" v-on:click="worksNext"><span>></span></a>
+                </div>
+                <transition-group tag="ul" name="list">
+                    <li v-for="(works, index) in workList" v-bind:key="works.title" v-bind:data-index="index" class="list-item">
+                        <!--<li v-for="works in item.content.workList">-->
+                        <a :href="works.link" target="_blank">
+                            <img class="worksImg" :src="works.img" :alt="works.title">
+                            <div>
+                                <p class="msgWorksTitle">{{ works.title }}</p>
+                            </div>
+
+                        </a>
+                        
+                    </li>
+                </transition-group>
+                
+                <template slot="prevButton"><i class="fas fa-chevron-left"></i></template>
+                <template slot="nextButton"><i class="fas fa-chevron-right"></i></template>
+            </div>
+        </div>
+    </script>
+
+    <!--< :img-src="" :exp-detail-list="" :exp-sub-title="" :exp-title="">-->
+    <script type="text/x-template" id="expTemplate">
+        <div class="msg">
+            <img class="shooImgS" :src="imgSrc" alt="Shoo">
+            <div class="msgBubble msgExp">
+                <p class="msgExpTime">{{ expSubTitle }}</p>
+                <p class="msgExpTitle">{{ expTitle }}</p>
+                
+                <ul>
+                    <!--<li v-for="expDetail in item.content.textList">{{ expDetail }}</li>-->
+                    <li v-for="expDetail in expDetailList">{{ expDetail }}</li>
+                </ul>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="visitorTemplate">
+        <div class="msg visitor">
+            <div class="msgBubble msgText">
+                <p>{{ text }}</p>
+            </div>
+        </div>
+    </script>
+
+    <script src="/app.js"></script>
+
+  </body>
+</html>
