@@ -102,8 +102,6 @@
             background-color: $dark-blue;
         }
 
-        
-
     };
 
     .toggleImg {
@@ -116,7 +114,6 @@
     };
 
 
-
     .logoImg {
         width: 70px;
 
@@ -124,8 +121,6 @@
             width: 50px;
         };
     };
-    
-
 };
 
 .toggleList {
@@ -169,7 +164,6 @@
             background-color: $white;
         };
     };
-
 };
 
 .container {
@@ -199,7 +193,6 @@
             font-size: 26px;
         }
     }
-
 }
 
 #messages {
@@ -212,8 +205,7 @@
 
     li {
         overflow: hidden;
-    }
-    
+    } 
 };
 
 
@@ -224,7 +216,6 @@
         align-self: flex-end;
         width: 36px;
         height: auto;
-
     };
     
     .msgBubble {
@@ -242,12 +233,12 @@
     border-radius: 40px;
 
     p {
-    margin: 0;
-    line-height: 30px;
+        margin: 0;
+        line-height: 30px;
 
-    @include padAndMobile {
-        line-height: 22px;
-    };
+        @include padAndMobile {
+            line-height: 22px;
+        };
     };
 
 };
@@ -287,7 +278,6 @@
 
     .worksBtnR {
         right: 0px;
-        
     }
 
     ul {
@@ -380,8 +370,7 @@
     ul {
         padding: 0px 25px;
         li {
-            margin-top: 20px;
-            
+            margin-top: 20px;    
         };
     };
 
@@ -401,25 +390,3 @@
     };
 
 };
-
-// vue transition
-.list-leave-active {
-    position: absolute;
-    opacity: 0;
-};
-
-
-.container-list{
-    opacity: 0;
-}
-
-.container-list-enter-active, .container-list-leave-active {
-    
-    transition: opacity 10s;
-    position: absolute;
-}
-.container-list-enter, .container-list-leave-to /* .list-leave-active below version 2.1.8 */ {
-    opacity: 0;
-    
-    transform: translateY(30px);
-  }

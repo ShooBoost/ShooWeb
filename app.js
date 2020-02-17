@@ -1,3 +1,4 @@
+// visitor component
 Vue.component('visitorComponent', {
     props: ['textH'],
     data: function(){
@@ -8,6 +9,8 @@ Vue.component('visitorComponent', {
     template: '#visitorTemplate'
 })
 
+
+// Shoo 純文字 component
 Vue.component('textComponent', {
     props: ['imgSrcH', 'textH'],
     data: function(){
@@ -19,6 +22,7 @@ Vue.component('textComponent', {
     template: '#textTemplate',
 })
 
+// Shoo 學習與實習經驗 component
 Vue.component('expComponent',{
     props: ['expSubTitleH', 'expTitleH', 'expDetailListH', 'imgSrcH'],
     data: function(){
@@ -33,6 +37,7 @@ Vue.component('expComponent',{
     template: '#expTemplate',
 })
 
+// Shoo 相關作品 component
 Vue.component('worksComponent', {
     props: ['workListH', 'imgSrcH'],
     data: function(){
@@ -48,12 +53,15 @@ Vue.component('worksComponent', {
     },
     template: '#worksTemplate',
     methods: {
+        // 切換下一個作品
         worksNext: function(){
             this.worksIndexNow ++; 
             this.workList = this.workListD.slice(this.worksIndexNow);
             console.log(this.workListH.length)
 
         },
+
+        // 切換到上一個作品
         worksPre: function(){
             this.worksIndexNow --; 
             this.workList = this.workListD.slice(this.worksIndexNow);
@@ -397,15 +405,18 @@ var app = new Vue({
         },
         ],
     },
+
+    // 在 created 階段先鋪首頁面 (我是誰頁)
     created: function(){
         this.messageShowList = this.message.filter(function(item){
             return item.category.indexOf('myInfo') !== -1
         })
         this.messageShow = true;
-
-        
     },
+
+
     methods: {
+        // 切換頁面內容
         changeMessageShow: function(category){
             this.messageShow = false;
             this.welcomeImg = 'asset/wel_' + category + '.svg';
@@ -417,9 +428,6 @@ var app = new Vue({
             // 確保 messageShowList 更新完再顯示到螢幕上
             var vm = this;
             setTimeout(function(){vm.messageShow = true;},1)
-            
-            
-
         },
         
     },

@@ -342,6 +342,11 @@ template {
   display: none;
 }
 
+.list-leave-active {
+  position: absolute;
+  opacity: 0;
+}
+
 * {
   font-family: '微軟正黑體';
   font-size: 18px;
@@ -787,26 +792,5 @@ template {
 .visitor .msgText p {
   color: #FFFFFF;
   font-weight: 300;
-}
-
-.list-leave-active {
-  position: absolute;
-  opacity: 0;
-}
-
-.container-list {
-  opacity: 0;
-}
-
-.container-list-enter-active, .container-list-leave-active {
-  -webkit-transition: opacity 10s;
-  transition: opacity 10s;
-  position: absolute;
-}
-
-.container-list-enter, .container-list-leave-to {
-  opacity: 0;
-  -webkit-transform: translateY(30px);
-          transform: translateY(30px);
 }
 /*# sourceMappingURL=all.css.map */
